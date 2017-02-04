@@ -1,0 +1,127 @@
+-gallery_image = [{name:"asas", image:"1"}, {name:"asas", image:"2"}, {name:"asas", image:"3"}, {name:"asas", image:"4"}, {name:"asas", image:"5"}, {name:"asas", image:"6"}]
+
+!!!5
+%html{class:"no-js", lang:"es-mx"}
+	%head
+		%meta{charset:"UTF-8"}
+		%title El Zalate
+		%meta{name:"Zalate Cantina-Bar", content:"Un lugar diferente, que busca generar un ambiente agradable de convivencia y conservar las costumbres y tradiciones de un pueblo."}
+		%meta{name:"viewport", content:"width=device-width, initial-scale=1"}
+		%meta{:"data-name"=> "image-counter", content:"#{gallery_image.size-1}"}
+
+		%link{rel:"stylesheet", href:"/css/normalize.css"}
+		%link{rel:"stylesheet", href:"/css/bootstrap.css"}
+		%link{rel:"stylesheet", href:"/css/flexboxgrid.min.css", type:"text/css"}
+		%link{rel:"stylesheet", href:"/css/style.css"}
+
+		%scrip{src:"js/vendor/modernizr-2.8.3.min.js"}
+		%scrip{src:"js/vendor/bootstrap.js"}
+
+	%body
+		="<!--[if lt IE 9>"
+		%p{class:"browserupgrade"}
+			Estas usando un navegador
+			%strong desactualizado.
+			Por favor
+			%a{:href => "http://browsehappy.com"}
+				actualiza tu navegador
+			para una mejor experiancia
+		="<![endif]-->"
+	.video-container
+		%video{autoplay:true, loop:true, muted:true, controls:false, width:"1280", height:"720"}
+			%source{src:"/video/mp4/w222.mp4", type:"video/mp4"}
+			%source{src:"/video/webm/w2.webm", type:"video/webm"}
+	.row.full-height.middle-xs.center-xs.up.relative.white-text#home
+		.col-xs-12
+			.box
+				%img.icon{src:"/img/beer2.png", width:200}
+				%h1.lora.no-margin EL ZALATE
+				%p#is-open
+					Cantina & Bar
+		%nav.fixed.top.navigation.full-width#navigation
+			-menu = [{title:"Inicio", link:"#home"}, {title:"Menú", link:"#menu"}, {title:"Galleria", link:"#gallery"}, {title:"Contacto", link:"#contact"}, {title:"Cómo llegar", link:"#location"}]
+			%ul.list-inline
+				-menu.each do |item|
+					%li
+						%a{href:item[:link]}= item[:title]
+		.absolute.black.large-padding.full-width#description
+			.row.middle-xs.center-xs
+				.col-xs-7.col-sm-6.medium#schedule
+					%i.glyphicon.glyphicon-time
+					%span.schedule Cerrado ahora <br> Abierto de 7:00pm a 12:30am
+				.col-xs.hidden#sticky-navigation
+					.box
+						%nav.navigation#responsive-nav
+							%i.glyphicon.glyphicon-menu-hamburger.medium.white-text.glyphicon-remove#menu-opener
+							%ul.list-inline
+								-menu.each do |item|
+									%li
+										%a.menu-link{href:item[:link]}= item[:title]
+	.text-center.relative#menu
+		.absolute.white.card#menu-title
+			%h2.lora Menú
+		-menu_photos = [{name:"asas", image:"1", pricing:"99.99"}, {name:"asas", image:"2", pricing:"99.99"}, {name:"asas", image:"3", pricing:"99.99"}, {name:"asas", image:"4", pricing:"99.99"}, {name:"asas", image:"5", pricing:"99.99"}, {name:"asas", image:"6", pricing:"99.99"}, {name:"asas", image:"7", pricing:"99.99"}, {name:"asas", image:"8", pricing:"99.99"},]
+
+		.row
+			-menu_photos.each do |photo|
+				.col-lg-3.col-md-4.col-sm-6.col-xs-12.menu{style:"background-image: url(/img/menu/#{photo[:image]}-thumb.jpg) ;"}
+					.screen.white-text
+						.row.middle-xs.full-height
+							.col-xs-12
+								%h3.lora= photo[:name]
+								%p.no-margin= photo[:pricing] + "$"
+
+	#gallery
+		.inner
+			-gallery_image.each do |image|
+				.image{style:"background-image: url(/img/slider/#{image[:image]}.jpg);"}
+
+	.container
+		.card.white.black-text.text-center.relative
+			%h3.medium
+				En
+				%strong.lora.medium El Zalate
+				encuentra un lugar diferente, que busca generar un ambiente agradable de convivencia y conservar las
+				%strong.lora.medium costumbres
+				y
+				%strong.lora.medium tradiciones
+				de un pueblo.
+				%strong.lora.medium #zalateando
+			%p.top-space.text-justify
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem beatae molestiae, aliquid illo alias esse consectetur magnam ut dolore sed accusamus labore, voluptatem harum nihil praesentium, aliquam vitae eaque deleniti!
+				.large-padding.medium.black.white-text.text-center
+					También puedes acceder a este sitio sin conexión a Internet.
+	.black.white-text.full-height#contact
+		.row.middle-xs.full-height
+			.col-xs-12
+				.box
+					%p.text-center.medium#info-contact Presiona enter para llenar el campo correspondiente y enviarnos un correo.
+					%form.white-text#contact-form{class:"step-form" , action:"https://formspree.io/c4r4.d3.p3d0@gmail.com", method:"POST"}
+						.row.center-xs
+							.col-xs-12.col-sm-1.col-md-1.first-sm
+								.box
+									-3.times do |i|
+										-if i == 0
+											.path-step.active
+										-else
+											.path-step
+							.col-xs-12.col-sm-6.col-lg-6.first-xs
+								.box
+									%fieldset.step.active
+										%input{type:"email", class:"input", require:true, name:"email", placeholder:"Ingresa tu correo electronico"}
+									%fieldset.step
+										%input{type:"text", class:"input", require:true, name:"name", placeholder:"Ingresa tu nombre"}
+									%fieldset.step
+										%textarea{name:"body", class:"input", require:true, placeholder:"Escribe aquí tu mensaje.."}
+
+	#location
+		#map
+		#map-info.black.large-padding.white-text.text-center.medium
+
+
+
+	%script{src:"js/vendor/jquery-3.1.1.min.js"}
+	%script
+		window.JQuery || document.write("<script src='/js/vendor/jquery-1.12.0.min.js'><\/script>")
+	%script{src:"https://maps.googleapis.com/maps/api/js?key=AIzaSyDLoNYhgxxEGdeMhtZtpx3gU_Ylvh6DDCc"}
+	%script{src:"dist/app.js"}
